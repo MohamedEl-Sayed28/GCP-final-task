@@ -10,6 +10,7 @@
 Decribe instructions for initiate the project
 ```bash
 terraform init 
+terraform validate #to make sure there are no syntax errors
 terraform plan #to make sure everything will be created correctly
 terraform apply #to apply the infrastructure on cloud provider 
 ```
