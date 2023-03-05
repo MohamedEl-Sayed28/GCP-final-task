@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: eu.gcr.io/muhammed-mahoud/python
+        ports:
+          - containerPort: 8000
+        env:
+          - name: REDIS_HOST
+            value: "redis-svc"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcp-servic
+  namespace: gcp-final-task
+spec:
+  type: LoadBalancer
+  selector:
+    app: python-app
+  ports:
+    - port: 8000
+      targetPort: 8000
+      name: gcp-servic
